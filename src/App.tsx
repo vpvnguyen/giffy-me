@@ -1,5 +1,5 @@
 import { CenteredFullPageFlexboxContainer } from "./layouts/CenteredFullPageFlexboxContainer";
-import { ExampleLoginForm } from "./layouts/ExampleLoginForm";
+import { ExampleLoginForm } from "./components/ExampleLoginForm";
 
 const App = () => {
   return (
