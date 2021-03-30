@@ -1,21 +1,29 @@
 import { useEffect, useReducer } from "react";
 
-const FETCH_INIT = "FETCH_INIT";
-const FETCH_SUCCESS = "FETCH_SUCCESS";
-const FETCH_FAILURE = "FETCH_FAILURE";
+interface IfetchStatus {
+  INIT: "FETCH_INIT";
+  SUCCESS: "FETCH_SUCCESS";
+  FAILURE: "FETCH_FAILURE";
+}
+
+const fetchStatus: IfetchStatus = {
+  INIT: "FETCH_INIT",
+  SUCCESS: "FETCH_SUCCESS",
+  FAILURE: "FETCH_FAILURE",
+};
 
 const dataFetchReducer = (state: any, action: any) => {
   switch (action.type) {
-    case FETCH_INIT:
+    case fetchStatus.INIT:
       return { ...state, loading: true, error: false };
-    case FETCH_SUCCESS:
+    case fetchStatus.SUCCESS:
       return {
         ...state,
         loading: false,
         error: false,
         data: action.payload,
       };
-    case FETCH_FAILURE:
+    case fetchStatus.FAILURE:
       return { ...state, loading: false, error: true };
     default:
       throw new Error("dataFetchReducer error: state, action");
@@ -33,13 +41,13 @@ export const useDataFetcher = (apiMethod: any, initialData = null) => {
     let runTask = true;
 
     const fetchData = async () => {
-      dispatch({ type: FETCH_INIT });
+      dispatch({ type: fetchStatus.INIT });
 
       try {
         const response = await apiMethod();
-        if (runTask) dispatch({ type: FETCH_SUCCESS, payload: response });
+        if (runTask) dispatch({ type: fetchStatus.SUCCESS, payload: response });
       } catch (error) {
-        if (runTask) dispatch({ type: FETCH_FAILURE });
+        if (runTask) dispatch({ type: fetchStatus.FAILURE });
       }
     };
 
