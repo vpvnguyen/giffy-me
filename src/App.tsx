@@ -7,7 +7,7 @@ import { useDataFetcher } from "./hooks/api/useDataFetcher";
 const GiphySearchBar = () => {
   return (
     <>
-      <div>Search Bar | search button</div>
+      <div>Search Bar | search button | parameters: limit, rating</div>
     </>
   );
 };
@@ -43,6 +43,8 @@ const ViewGiphyList = () => {
 
   return (
     <div>
+      <h1 className="p-4">Search String: {searchParameters.searchQuery}</h1>
+
       {loading && <div>Loading user list...</div>}
 
       {error && <div>There was an error loading the user list.</div>}
