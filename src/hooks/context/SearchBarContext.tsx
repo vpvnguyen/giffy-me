@@ -8,20 +8,23 @@ import {
 } from "react";
 
 export interface ISearchBarContext {
-  searchInput: string;
+  searchInput: any;
   setSearchInput: Dispatch<SetStateAction<string>>;
 }
 
 interface ISearchBarContextProviderProps {
   children: ReactNode;
+  initialSearchInputState: any;
 }
 
 const SearchBarContext = createContext<ISearchBarContext>(undefined!);
 
-export const SearchBarContextProvider = ({
-  children,
-}: ISearchBarContextProviderProps) => {
-  const [searchInput, setSearchInput] = useState<string>("");
+export const SearchBarContextProvider = (
+  props: ISearchBarContextProviderProps
+) => {
+  const [searchInput, setSearchInput] = useState<any>(
+    props.initialSearchInputState
+  );
 
   const searchBarContextValue: ISearchBarContext = {
     searchInput,
@@ -30,7 +33,7 @@ export const SearchBarContextProvider = ({
 
   return (
     <SearchBarContext.Provider value={searchBarContextValue}>
-      {children}
+      {props.children}
     </SearchBarContext.Provider>
   );
 };
