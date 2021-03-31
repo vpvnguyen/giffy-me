@@ -3,6 +3,32 @@ import { GifImage } from "./components/GifImage";
 import { GiphyApiModel, IGiphyApiSearchParameters } from "./services/giphy.api";
 import { useDataFetcher } from "./hooks/api/useDataFetcher";
 
+// new component to add search parameters and construct search url
+const GiphySearchBar = () => {
+  return (
+    <>
+      <div>Search Bar | search button</div>
+    </>
+  );
+};
+
+const Bookmarks = () => {
+  return (
+    <>
+      <div>Bookmarks</div>
+    </>
+  );
+};
+
+const ViewGiphyListActions = () => {
+  return (
+    <>
+      <div>Save Search String | Image</div>
+    </>
+  );
+};
+
+// pass search URL into component to fetch data
 const ViewGiphyList = () => {
   const searchParameters: IGiphyApiSearchParameters = {
     searchQuery: "pokemon",
@@ -26,7 +52,11 @@ const ViewGiphyList = () => {
           <div key={index} className="p-4">
             <div>ID: {value.id}</div>
             <div>Title: {value.title}</div>
-            <div>Source: {value.source}</div>
+            {value.source && (
+              <a href={value.source} target="_blank" rel="noreferrer">
+                Source
+              </a>
+            )}
             <GifImage
               title={value.title}
               gifUrl={value.images.fixed_width.url}
@@ -38,13 +68,22 @@ const ViewGiphyList = () => {
   );
 };
 
+const ViewGiphyListPagination = () => {
+  return (
+    <>
+      <div>Pagination | Lazy Loading (all images)</div>
+    </>
+  );
+};
+
 const App = () => {
   return (
     <CenteredFullPageFlexboxContainer classes="flex-col">
-      <div>Search Bar | search button</div>
-      <div>Bookmarks</div>
-      <div>Save Search String | Image</div>
+      <GiphySearchBar />
+      <Bookmarks />
+      <ViewGiphyListActions />
       <ViewGiphyList />
+      <ViewGiphyListPagination />
     </CenteredFullPageFlexboxContainer>
   );
 };
