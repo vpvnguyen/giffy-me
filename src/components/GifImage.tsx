@@ -6,6 +6,14 @@ interface IGifImageProps {
   title: string;
 }
 
+export const GifImageActions = () => {
+  return (
+    <>
+      <div>Gif Image Actions</div>
+    </>
+  );
+};
+
 export const GifImage = (props: IGifImageProps) => {
   const [animate, setAnimate] = useState<boolean>(false);
 
@@ -15,10 +23,13 @@ export const GifImage = (props: IGifImageProps) => {
   };
 
   return (
-    <img
-      src={animate ? props.gifUrl : props.stillUrl}
-      alt={props.title}
-      onClick={handleClick}
-    />
+    <div>
+      <img
+        src={animate ? props.gifUrl : props.stillUrl}
+        alt={props.title}
+        onClick={handleClick}
+      />
+      <GifImageActions />
+    </div>
   );
 };
