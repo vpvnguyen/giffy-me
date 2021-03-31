@@ -7,13 +7,18 @@ interface IfetchStatus {
   FAILURE: "FETCH_FAILURE";
 }
 
+interface IdataFetcherReducer {
+  type?: string;
+  payload?: any;
+}
+
 const fetchStatus: IfetchStatus = {
   INIT: "FETCH_INIT",
   SUCCESS: "FETCH_SUCCESS",
   FAILURE: "FETCH_FAILURE",
 };
 
-const dataFetchReducer = (state: any, action: any) => {
+const dataFetchReducer = (state: any, action: IdataFetcherReducer) => {
   switch (action.type) {
     case fetchStatus.INIT:
       return { ...state, loading: true, error: false };
