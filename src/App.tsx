@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CenteredFullPageFlexboxContainer } from "./layouts/CenteredFullPageFlexboxContainer";
+import { CenteredFullPageFlexboxContainer } from "./components/layouts/CenteredFullPageFlexboxContainer";
 import { GiphyApiModel, IGiphyApiSearchParameters } from "./services/giphy.api";
 import { useDataFetcher } from "./hooks/api/useDataFetcher";
 interface IGifImageProps {
