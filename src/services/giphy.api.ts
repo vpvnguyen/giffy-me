@@ -9,7 +9,7 @@ export interface IGiphyApiSearchResponse {
   id: string;
   title: string;
   source: string;
-  images: string[];
+  images: any;
 }
 export class GiphyApiModel {
   private static readonly _baseUrl: string = "https://api.giphy.com/v1/gifs";
