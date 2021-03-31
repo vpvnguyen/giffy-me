@@ -41,6 +41,9 @@ const ViewGiphyList = () => {
 const App = () => {
   return (
     <CenteredFullPageFlexboxContainer classes="flex-col">
+      <div>Search Bar | search button</div>
+      <div>Bookmarks</div>
+      <div>Save Search String | Image</div>
       <ViewGiphyList />
     </CenteredFullPageFlexboxContainer>
   );
