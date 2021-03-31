@@ -1,29 +1,7 @@
-import { useState } from "react";
 import { CenteredFullPageFlexboxContainer } from "./components/layouts/CenteredFullPageFlexboxContainer";
+import { GifImage } from "./components/GifImage";
 import { GiphyApiModel, IGiphyApiSearchParameters } from "./services/giphy.api";
 import { useDataFetcher } from "./hooks/api/useDataFetcher";
-interface IGifImageProps {
-  gifUrl: string;
-  stillUrl: string;
-  title: string;
-}
-
-const GifImage = (props: IGifImageProps) => {
-  const [animate, setAnimate] = useState<boolean>(false);
-
-  const handleClick = (event: any) => {
-    event.preventDefault();
-    setAnimate(!animate);
-  };
-
-  return (
-    <img
-      src={animate ? props.gifUrl : props.stillUrl}
-      alt={props.title}
-      onClick={handleClick}
-    />
-  );
-};
 
 const ViewGiphyList = () => {
   const searchParameters: IGiphyApiSearchParameters = {
