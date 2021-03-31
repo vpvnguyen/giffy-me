@@ -21,7 +21,7 @@ const SearchBarContext = createContext<ISearchBarContext>(undefined!);
 export const SearchBarContextProvider = ({
   children,
 }: ISearchBarContextProviderProps) => {
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState<string>("");
 
   const searchBarContextValue: ISearchBarContext = {
     searchInput,
