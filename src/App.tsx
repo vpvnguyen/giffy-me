@@ -6,9 +6,48 @@ import {
   IGiphyApiSearchResponse,
 } from "./services/giphy.api";
 import { useDataFetcher } from "./hooks/api/useDataFetcher";
+import {
+  SearchBarContextProvider,
+  useSearchBarContext,
+} from "./hooks/context/SearchBarContext";
+
+const initialGiphySearchState = {
+  searchQuery: "",
+  limit: 5,
+  offset: 0,
+  explicitRating: "g",
+};
 
 // new component to add search parameters and construct search url
 const GiphySearchBar = () => {
+  console.log("GiphySearchBar()");
+
+  const explicitRatingSelectOptions = [
+    { key: "g", name: "G" },
+    { key: "pg", name: "PG" },
+    { key: "pg-13", name: "PG-13" },
+    { key: "r", name: "R" },
+  ];
+
+  const { searchInput, setSearchInput } = useSearchBarContext();
+
+  const handleChangeSearchInput = (event: any) => {
+    console.log("handleChangeSearchInput", event.target.value);
+
+    setSearchInput({
+      ...searchInput,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleClickSearchButton = (event: any) => {
+    event.preventDefault();
+
+    console.log("handleClickSearchButton", searchInput);
+
+    // send to API for search
+  };
+
   return (
     <>
       <div>Search Bar | search button | parameters: limit, rating</div>
@@ -20,10 +59,16 @@ const GiphySearchBar = () => {
             id="search"
             type="text"
             placeholder="Search"
+            name={`searchQuery`}
+            value={searchInput.searchQuery}
+            onChange={handleChangeSearchInput}
           />
 
           <div className="p-4">
-            <button className="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-12 h-12 flex items-center justify-center">
+            <button
+              className="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-12 h-12 flex items-center justify-center"
+              onClick={handleClickSearchButton}
+            >
               icon
             </button>
           </div>
@@ -43,16 +88,16 @@ const GiphySearchBar = () => {
             fillRule="nonzero"
           />
         </svg>
-        <select className="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
-          <option>Choose a color</option>
-          <option>Red</option>
-          <option>Blue</option>
-          <option>Yellow</option>
-          <option>Black</option>
-          <option>Orange</option>
-          <option>Purple</option>
-          <option>Gray</option>
-          <option>White</option>
+        <select
+          className="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
+          name={`explicitRating`}
+          onChange={handleChangeSearchInput}
+        >
+          {explicitRatingSelectOptions.map((value: any) => (
+            <option value={value.key} key={value.key}>
+              {value.name}
+            </option>
+          ))}
         </select>
       </div>
     </>
@@ -130,7 +175,11 @@ const ViewGiphyListPagination = () => {
 const App = () => {
   return (
     <FlexboxContainerFullWidthCentered classes="flex-col">
-      <GiphySearchBar />
+      <SearchBarContextProvider
+        initialSearchInputState={initialGiphySearchState}
+      >
+        <GiphySearchBar />
+      </SearchBarContextProvider>
       <Bookmarks />
       <ViewGiphyListActions />
       <ViewGiphyList />
