@@ -22,9 +22,14 @@ const SearchBarContext = createContext<ISearchBarContext>(undefined!);
 export const SearchBarContextProvider = (
   props: ISearchBarContextProviderProps
 ) => {
+  console.log("SearchBarContextProvider");
+  console.log("props.initialSearchInputState", props.initialSearchInputState);
+
   const [searchInput, setSearchInput] = useState<any>(
     props.initialSearchInputState
   );
+
+  console.log("searchInput", searchInput);
 
   const searchBarContextValue: ISearchBarContext = {
     searchInput,
@@ -39,6 +44,10 @@ export const SearchBarContextProvider = (
 };
 
 export const useSearchBarContext = () => {
+  console.log("useSearchBarContext");
   const { searchInput, setSearchInput } = useContext(SearchBarContext);
+
+  console.log("searchInput", searchInput);
+
   return { searchInput, setSearchInput };
 };
