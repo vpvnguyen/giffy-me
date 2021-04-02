@@ -135,6 +135,8 @@ const Bookmarks = () => {
   return (
     <>
       <div className="relative inline-flex">
+        <FontAwesomeIcon icon={faFolder} />
+
         <svg
           className="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
           xmlns="http://www.w3.org/2000/svg"
@@ -152,8 +154,6 @@ const Bookmarks = () => {
           name={`bookmarks`}
           // onChange={handleChangeSearchInput}
         >
-          <FontAwesomeIcon icon={faFolder} />
-
           {bookmarks.map((value: any) => (
             <option value={value.key} key={value.key}>
               {value.name}
