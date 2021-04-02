@@ -157,10 +157,19 @@ const Bookmarks = () => {
   );
 };
 
+const MessageBanner = () => {
+  const { searchQuery } = useSearchQueryContext();
+
+  return (
+    <div className="sm:container flex flex-col items-center border border-red-400">
+      <p className="p-4">Search String: {searchQuery}</p>
+    </div>
+  );
+};
+
 // pass search URL into component to fetch data
 const ViewGiphyList = () => {
   const { searchUrl } = useSearchUrlContext();
-  const { searchQuery } = useSearchQueryContext();
   console.log("ViewGiphyList searchUrl", searchUrl);
 
   const { loading, error, response, setUrl } = useDataFetcher();
@@ -170,11 +179,7 @@ const ViewGiphyList = () => {
   }, [searchUrl, setUrl]);
 
   return (
-    <div className="sm:container flex flex-col items-center">
-      <h1 className="border border-red-400 p-4">
-        Search String: {searchQuery}
-      </h1>
-
+    <div className="sm:container">
       {loading && <div>Loading user list...</div>}
 
       {error && <div>There was an error loading the user list.</div>}
@@ -222,6 +227,7 @@ const App = () => {
         <div className="sm:container border border-gray-400 py-12">
           <Header />
         </div>
+        <MessageBanner />
         <ViewGiphyList />
         <ViewGiphyListPagination />
       </SearchBarContextProvider>
