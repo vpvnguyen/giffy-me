@@ -36,8 +36,8 @@ const dataFetchReducer = (state: any, action: IdataFetcherReducer) => {
   }
 };
 
-export const useDataFetcher = (initialUrl: string, initialData = null) => {
-  const [url, setUrl] = useState<string>(initialUrl);
+export const useDataFetcher = (initialData = null) => {
+  const [url, setUrl] = useState<string>("");
 
   const [state, dispatch] = useReducer(dataFetchReducer, {
     loading: false,
