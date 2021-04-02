@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { FlexboxContainerFullWidthCentered } from "./components/layouts/FlexboxContainerFullWidthCentered";
 import { GifImage } from "./components/GifImage";
-import {
-  GiphyApiModel,
-  IGiphyApiSearchParameters,
-  IGiphyApiSearchResponse,
-} from "./services/giphy.api";
+import { GiphyApiModel, IGiphyApiSearchResponse } from "./services/giphy.api";
 import { useDataFetcher } from "./hooks/api/useDataFetcher";
 import {
   SearchBarContextProvider,
@@ -84,7 +80,7 @@ const Header = () => {
   const { setSearchUrl } = useSearchUrlContext();
 
   const handleChangeSearchInput = (event: any) => {
-    console.log("handleChangeSearchInput", event.target.value);
+    console.log("Header handleChangeSearchInput", event.target.value);
 
     setSearchInput({
       ...searchInput,
@@ -93,16 +89,13 @@ const Header = () => {
   };
 
   const handleClickSearchButton = (event: any) => {
-    console.log("handleClickSearchButton");
     event.preventDefault();
 
-    console.log("handleClickSearchButton", searchInput);
+    console.log("handleClickSearchButton searchInput", searchInput);
 
     const url: string = GiphyApiModel.getSearchUrl(searchInput);
 
-    console.log("url", url);
-
-    // send to API for search
+    console.log("handleClickSearchButton url", url);
     setSearchUrl(url);
   };
 
@@ -170,7 +163,7 @@ const ViewGiphyList = () => {
 
   useEffect(() => {
     setUrl(searchUrl);
-  }, [searchUrl]);
+  }, [searchUrl, setUrl]);
 
   return (
     <div className="sm:container flex flex-col items-center">
