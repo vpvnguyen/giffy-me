@@ -16,8 +16,14 @@ export interface ISearchBarContext {
 
 interface ISearchBarContextProviderProps {
   children: ReactNode;
-  initialSearchInputState: any;
 }
+
+const initialGiphySearchState = {
+  searchQuery: "",
+  limit: 20,
+  offset: 0,
+  explicitRating: "g",
+};
 
 const SearchBarContext = createContext<ISearchBarContext>(undefined!);
 
@@ -25,11 +31,8 @@ export const SearchBarContextProvider = (
   props: ISearchBarContextProviderProps
 ) => {
   console.log("SearchBarContextProvider");
-  console.log("props.initialSearchInputState", props.initialSearchInputState);
 
-  const [searchInput, setSearchInput] = useState<any>(
-    props.initialSearchInputState
-  );
+  const [searchInput, setSearchInput] = useState<any>(initialGiphySearchState);
   const [searchUrl, setSearchUrl] = useState<string>("");
 
   console.log("searchInput", searchInput);

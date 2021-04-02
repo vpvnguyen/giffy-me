@@ -15,13 +15,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faFolder } from "@fortawesome/free-solid-svg-icons";
 
-const initialGiphySearchState = {
-  searchQuery: "",
-  limit: 5,
-  offset: 0,
-  explicitRating: "g",
-};
-
 // new component to add search parameters and construct search url
 const SearchBar = (props: any) => (
   <form onSubmit={props.handleClickSearchButton}>
@@ -226,9 +219,7 @@ const ViewGiphyListPagination = () => {
 const App = () => {
   return (
     <FlexboxContainerFullWidthCentered classes="flex-col">
-      <SearchBarContextProvider
-        initialSearchInputState={initialGiphySearchState}
-      >
+      <SearchBarContextProvider>
         <Header />
         <Bookmarks />
         <ViewGiphyList />
