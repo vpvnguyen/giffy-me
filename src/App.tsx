@@ -98,9 +98,14 @@ const Header = () => {
   };
 
   const handleClickSearchButton = (event: any) => {
+    console.log("handleClickSearchButton");
     event.preventDefault();
 
     console.log("handleClickSearchButton", searchInput);
+
+    const url: string = GiphyApiModel.getSearchUrl(searchInput);
+
+    console.log("url", url);
 
     // send to API for search
   };
