@@ -66,3 +66,10 @@ export const useSearchUrlContext = () => {
 
   return { searchUrl, setSearchUrl };
 };
+
+export const useSearchQueryContext = () => {
+  console.log("useSearchUrlContext");
+  const { searchInput } = useContext(SearchBarContext);
+  const { searchQuery } = searchInput;
+  return { searchQuery };
+};
