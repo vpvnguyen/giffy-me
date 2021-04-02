@@ -10,6 +10,8 @@ import {
 export interface ISearchBarContext {
   searchInput: any;
   setSearchInput: Dispatch<SetStateAction<string>>;
+  searchUrl: string;
+  setSearchUrl: Dispatch<SetStateAction<string>>;
 }
 
 interface ISearchBarContextProviderProps {
@@ -28,12 +30,15 @@ export const SearchBarContextProvider = (
   const [searchInput, setSearchInput] = useState<any>(
     props.initialSearchInputState
   );
+  const [searchUrl, setSearchUrl] = useState<string>("");
 
   console.log("searchInput", searchInput);
 
   const searchBarContextValue: ISearchBarContext = {
     searchInput,
     setSearchInput,
+    searchUrl,
+    setSearchUrl,
   };
 
   return (
@@ -50,4 +55,11 @@ export const useSearchBarContext = () => {
   console.log("searchInput", searchInput);
 
   return { searchInput, setSearchInput };
+};
+
+export const useSearchUrlContext = () => {
+  console.log("useSearchUrlContext");
+  const { searchUrl, setSearchUrl } = useContext(SearchBarContext);
+
+  return { searchUrl, setSearchUrl };
 };
