@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FlexboxContainerFullWidthCentered } from "./components/layouts/FlexboxContainerFullWidthCentered";
 import { GifImage } from "./components/GifImage";
 import {
@@ -10,6 +10,7 @@ import { useDataFetcher } from "./hooks/api/useDataFetcher";
 import {
   SearchBarContextProvider,
   useSearchBarContext,
+  useSearchUrlContext,
 } from "./hooks/context/SearchBarContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faFolder } from "@fortawesome/free-solid-svg-icons";
@@ -87,6 +88,7 @@ const Header = () => {
   console.log("Header()");
 
   const { searchInput, setSearchInput } = useSearchBarContext();
+  const { setSearchUrl } = useSearchUrlContext();
 
   const handleChangeSearchInput = (event: any) => {
     console.log("handleChangeSearchInput", event.target.value);
@@ -108,6 +110,7 @@ const Header = () => {
     console.log("url", url);
 
     // send to API for search
+    setSearchUrl(url);
   };
 
   return (
@@ -167,20 +170,18 @@ const Bookmarks = () => {
 
 // pass search URL into component to fetch data
 const ViewGiphyList = () => {
-  const searchParameters: IGiphyApiSearchParameters = {
-    searchQuery: "pokemon",
-    limit: 20,
-    offset: 0,
-    explicitRating: "r",
-  };
+  const { searchUrl } = useSearchUrlContext();
+  console.log("ViewGiphyList searchUrl", searchUrl);
 
-  const url: string = GiphyApiModel.getSearchUrl(searchParameters);
+  const { loading, error, response, setUrl } = useDataFetcher(searchUrl);
 
-  const { loading, error, response } = useDataFetcher(url);
+  useEffect(() => {
+    setUrl(searchUrl);
+  }, [searchUrl]);
 
   return (
     <div className="sm:container flex flex-col items-center">
-      <h1 className="p-4">Search String: {searchParameters.searchQuery}</h1>
+      <h1 className="p-4">Search String: {searchUrl}</h1>
 
       {loading && <div>Loading user list...</div>}
 
@@ -188,6 +189,8 @@ const ViewGiphyList = () => {
 
       <div className="flex flex-wrap justify-center items-center">
         {response &&
+          response.data &&
+          response.data.data &&
           response.data.data.map((value: IGiphyApiSearchResponse) => (
             <div
               key={value.id}
@@ -227,10 +230,10 @@ const App = () => {
         initialSearchInputState={initialGiphySearchState}
       >
         <Header />
+        <Bookmarks />
+        <ViewGiphyList />
+        <ViewGiphyListPagination />
       </SearchBarContextProvider>
-      <Bookmarks />
-      <ViewGiphyList />
-      <ViewGiphyListPagination />
     </FlexboxContainerFullWidthCentered>
   );
 };
