@@ -6,6 +6,7 @@ import { useDataFetcher } from "./hooks/api/useDataFetcher";
 import {
   SearchBarContextProvider,
   useSearchBarContext,
+  useSearchQueryContext,
   useSearchUrlContext,
 } from "./hooks/context/SearchBarContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -100,7 +101,7 @@ const Header = () => {
   };
 
   return (
-    <div>
+    <>
       <SearchBar
         handleChangeSearchInput={handleChangeSearchInput}
         handleClickSearchButton={handleClickSearchButton}
@@ -111,7 +112,9 @@ const Header = () => {
         name={`explicitRating`}
         handleChangeSearchInput={handleChangeSearchInput}
       />
-    </div>
+
+      <Bookmarks />
+    </>
   );
 };
 
@@ -157,9 +160,10 @@ const Bookmarks = () => {
 // pass search URL into component to fetch data
 const ViewGiphyList = () => {
   const { searchUrl } = useSearchUrlContext();
+  const { searchQuery } = useSearchQueryContext();
   console.log("ViewGiphyList searchUrl", searchUrl);
 
-  const { loading, error, response, setUrl } = useDataFetcher(searchUrl);
+  const { loading, error, response, setUrl } = useDataFetcher();
 
   useEffect(() => {
     setUrl(searchUrl);
@@ -167,13 +171,15 @@ const ViewGiphyList = () => {
 
   return (
     <div className="sm:container flex flex-col items-center">
-      <h1 className="p-4">Search String: {searchUrl}</h1>
+      <h1 className="border border-red-400 p-4">
+        Search String: {searchQuery}
+      </h1>
 
       {loading && <div>Loading user list...</div>}
 
       {error && <div>There was an error loading the user list.</div>}
 
-      <div className="flex flex-wrap justify-center items-center">
+      <div className="flex flex-wrap justify-center items-center border border-green-400">
         {response &&
           response.data &&
           response.data.data &&
@@ -213,8 +219,9 @@ const App = () => {
   return (
     <FlexboxContainerFullWidthCentered classes="flex-col">
       <SearchBarContextProvider>
-        <Header />
-        <Bookmarks />
+        <div className="sm:container border border-gray-400 py-12">
+          <Header />
+        </div>
         <ViewGiphyList />
         <ViewGiphyListPagination />
       </SearchBarContextProvider>
