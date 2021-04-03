@@ -20,7 +20,8 @@ const SearchBar = (props: any) => (
         className="rounded-full w-full py-4 px-6 text-gray-700 focus:outline-none appearance-none"
         id="search"
         type="text"
-        placeholder="Search"
+        // use previous search history
+        placeholder={props.searchQuery || "Search"}
         name={`searchQuery`}
         value={props.searchQuery}
         onChange={props.handleChangeSearchInput}
@@ -79,6 +80,7 @@ const Header = () => {
 
   const { searchInput, setSearchInput } = useSearchBarContext();
   const { setSearchUrl } = useSearchUrlContext();
+  // import previous search query
 
   const handleChangeSearchInput = (event: any) => {
     console.log("Header handleChangeSearchInput", event.target.value);
@@ -98,6 +100,8 @@ const Header = () => {
 
     console.log("handleClickSearchButton url", url);
     setSearchUrl(url);
+
+    // set previous search query
   };
 
   return (
@@ -180,11 +184,11 @@ const ViewGiphyList = () => {
 
   return (
     <div className="sm:container">
-      {loading && <div>Loading user list...</div>}
-
-      {error && <div>There was an error loading the user list.</div>}
-
       <div className="flex flex-wrap justify-center items-center border border-green-400">
+        {loading && <div>Loading user list...</div>}
+
+        {error && <div>There was an error loading the user list.</div>}
+
         {response &&
           response.data &&
           response.data.data &&
