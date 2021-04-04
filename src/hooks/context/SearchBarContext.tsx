@@ -12,8 +12,8 @@ export interface ISearchBarContext {
   setSearchInput: Dispatch<SetStateAction<string>>;
   searchUrl: string;
   setSearchUrl: Dispatch<SetStateAction<string>>;
-  previousSearchQuery: string;
-  setPreviousSearchQuery: Dispatch<SetStateAction<string>>;
+  searchHistory: any;
+  setSearchHistory: Dispatch<SetStateAction<string>>;
 }
 
 interface ISearchBarContextProviderProps {
@@ -27,7 +27,11 @@ const initialGiphySearchState = {
   explicitRating: "g",
 };
 
-const initialPreviousSearchQuery: string = "";
+const initialSearchUrl: string = "";
+
+const initialSearchHistory: any = {
+  searchQuery: "",
+};
 
 const SearchBarContext = createContext<ISearchBarContext>(undefined!);
 
@@ -37,10 +41,8 @@ export const SearchBarContextProvider = (
   console.log("SearchBarContextProvider");
 
   const [searchInput, setSearchInput] = useState<any>(initialGiphySearchState);
-  const [searchUrl, setSearchUrl] = useState<string>("");
-  const [previousSearchQuery, setPreviousSearchQuery] = useState<string>(
-    initialPreviousSearchQuery
-  );
+  const [searchUrl, setSearchUrl] = useState<string>(initialSearchUrl);
+  const [searchHistory, setSearchHistory] = useState<any>(initialSearchHistory);
 
   console.log("searchInput", searchInput);
 
@@ -49,8 +51,8 @@ export const SearchBarContextProvider = (
     setSearchInput,
     searchUrl,
     setSearchUrl,
-    previousSearchQuery,
-    setPreviousSearchQuery,
+    searchHistory,
+    setSearchHistory,
   };
 
   return (
@@ -76,9 +78,8 @@ export const useSearchUrlContext = () => {
   return { searchUrl, setSearchUrl };
 };
 
-export const useSearchQueryContext = () => {
-  console.log("useSearchUrlContext");
-  const { searchInput } = useContext(SearchBarContext);
-  const { searchQuery } = searchInput;
-  return { searchQuery };
+export const useSearchHistoryContext = () => {
+  console.log("useSearchHistoryContext");
+  const { searchHistory, setSearchHistory } = useContext(SearchBarContext);
+  return { searchHistory, setSearchHistory };
 };
