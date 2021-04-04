@@ -21,7 +21,6 @@ const SearchBar = (props: any) => (
         className="rounded-full w-full py-4 px-6 text-gray-700 focus:outline-none appearance-none"
         id="search"
         type="text"
-        // use previous search history
         placeholder={props.searchQueryHistory || "Search"}
         name={`searchQuery`}
         value={props.searchQuery}
@@ -211,9 +210,9 @@ const ViewGiphyList = () => {
   return (
     <div className="sm:container">
       <div className="flex flex-wrap justify-center items-center border border-green-400">
-        {loading && <div>Loading user list...</div>}
+        {loading && <div>Loading Gifs...</div>}
 
-        {error && <div>There was an error loading the user list.</div>}
+        {error && <div>There was an error loading Gifs.</div>}
 
         {response &&
           response.data &&
