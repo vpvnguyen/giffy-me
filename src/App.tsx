@@ -10,7 +10,7 @@ import {
   useSearchUrlContext,
 } from "./hooks/context/SearchBarContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faFolder } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 // new component to add search parameters and construct search url
 const SearchBar = (props: any) => (
@@ -131,8 +131,6 @@ const Bookmarks = () => {
   return (
     <>
       <div className="relative inline-flex">
-        <FontAwesomeIcon icon={faFolder} />
-
         <svg
           className="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
           xmlns="http://www.w3.org/2000/svg"
