@@ -11,6 +11,7 @@ import {
 } from "./hooks/context/SearchBarContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 
 // new component to add search parameters and construct search url
 const SearchBar = (props: any) => (
@@ -26,9 +27,22 @@ const SearchBar = (props: any) => (
         value={props.searchQuery}
         onChange={props.handleChangeSearchInput}
       />
-      |
+
       <div className="p-4">
-        <button type="submit">
+        {props.searchQuery && (
+          <button
+            onClick={props.handleClickClearSearch}
+            className="text-gray-400 hover:text-red-400"
+          >
+            <FontAwesomeIcon icon={faTimesCircle} />
+          </button>
+        )}
+      </div>
+
+      <div className="h-4 border border-r border-gray-300" />
+
+      <div className="p-4">
+        <button type="submit" className="text-blue-500 hover:text-blue-300">
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </div>
@@ -111,11 +125,18 @@ const Header = () => {
     });
   };
 
+  const handleClickClearSearch = (event: any) => {
+    event.preventDefault();
+
+    setSearchInput({ ...searchInput, searchQuery: "" });
+  };
+
   return (
     <>
       <SearchBar
         handleChangeSearchInput={handleChangeSearchInput}
         handleClickSearchButton={handleClickSearchButton}
+        handleClickClearSearch={handleClickClearSearch}
         searchQueryHistory={searchHistory.searchQuery}
         searchQuery={searchInput.searchQuery}
       />
