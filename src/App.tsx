@@ -6,7 +6,7 @@ import { useDataFetcher } from "./hooks/api/useDataFetcher";
 import {
   SearchBarContextProvider,
   useSearchBarContext,
-  useSearchQueryContext,
+  useSearchHistoryContext,
   useSearchUrlContext,
 } from "./hooks/context/SearchBarContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,7 +21,7 @@ const SearchBar = (props: any) => (
         id="search"
         type="text"
         // use previous search history
-        placeholder={props.searchQuery || "Search"}
+        placeholder={props.searchQueryHistory || "Search"}
         name={`searchQuery`}
         value={props.searchQuery}
         onChange={props.handleChangeSearchInput}
@@ -81,6 +81,7 @@ const Header = () => {
   const { searchInput, setSearchInput } = useSearchBarContext();
   const { setSearchUrl } = useSearchUrlContext();
   // import previous search query
+  const { searchHistory, setSearchHistory } = useSearchHistoryContext();
 
   const handleChangeSearchInput = (event: any) => {
     console.log("Header handleChangeSearchInput", event.target.value);
@@ -101,7 +102,13 @@ const Header = () => {
     console.log("handleClickSearchButton url", url);
     setSearchUrl(url);
 
+    setSearchInput({ ...searchInput, searchQuery: "" });
+
     // set previous search query
+    setSearchHistory({
+      ...searchHistory,
+      searchQuery: searchInput.searchQuery,
+    });
   };
 
   return (
@@ -109,6 +116,8 @@ const Header = () => {
       <SearchBar
         handleChangeSearchInput={handleChangeSearchInput}
         handleClickSearchButton={handleClickSearchButton}
+        searchQueryHistory={searchHistory.searchQuery}
+        searchQuery={searchInput.searchQuery}
       />
 
       {/* rating dropdown */}
@@ -160,11 +169,9 @@ const Bookmarks = () => {
 };
 
 const MessageBanner = () => {
-  const { searchQuery } = useSearchQueryContext();
-
   return (
     <div className="sm:container flex flex-col items-center border border-red-400">
-      <p className="p-4">Search String: {searchQuery}</p>
+      <p className="p-4">Message Banner</p>
     </div>
   );
 };
