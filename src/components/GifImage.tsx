@@ -27,6 +27,7 @@ export const GifImage = (props: IGifImageProps) => {
       <img
         src={animate ? props.gifUrl : props.stillUrl}
         alt={props.title}
+        title={props.title}
         onClick={handleClick}
       />
       <GifImageActions />
