@@ -6,6 +6,7 @@ import {
   useContext,
   useState,
 } from "react";
+import { GiphyApiModel } from "../../services/giphy.api";
 
 export interface ISearchBarContext {
   searchInput: any;
@@ -45,6 +46,35 @@ export const SearchBarContextProvider = (
   const [searchHistory, setSearchHistory] = useState<any>(initialSearchHistory);
 
   console.log("searchInput", searchInput);
+
+  const updateSearchInput = (event: any) => {
+    console.log("handleChangeSearchInput", event.target.value);
+
+    setSearchInput({
+      ...searchInput,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const resetSearchQuery = () => {
+    setSearchInput({ ...searchInput, searchQuery: "" });
+  };
+
+  const submitSearch = () => {
+    console.log("handleClickSearchButton searchInput", searchInput);
+
+    const url: string = GiphyApiModel.getSearchUrl(searchInput);
+
+    console.log("handleClickSearchButton url", url);
+    setSearchUrl(url);
+    resetSearchQuery();
+
+    // set previous search query
+    setSearchHistory({
+      ...searchHistory,
+      searchQuery: searchInput.searchQuery,
+    });
+  };
 
   const searchBarContextValue: ISearchBarContext = {
     searchInput,
