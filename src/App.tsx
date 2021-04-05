@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { FlexboxContainerFullWidthCentered } from "./components/layouts/FlexboxContainerFullWidthCentered";
+import {
+  FlexContainer,
+  FlexFullWidthCenter,
+} from "./components/layouts/FlexContainers";
 import { GifImage } from "./components/GifImage";
 import { GiphyApiModel, IGiphyApiSearchResponse } from "./services/giphy.api";
 import { useDataFetcher } from "./hooks/api/useDataFetcher";
@@ -10,14 +13,14 @@ import {
   useSearchUrlContext,
 } from "./hooks/context/SearchBarContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 
 const SearchBar = (props: any) => (
   <form onSubmit={props.handleClickSearchButton}>
-    <div className="flex items-center rounded-full border border-gray-400 hover:border-gray-700">
+    <div className="flex items-center rounded-full border border-gray-400 hover:border-gray-600">
       <input
-        className="rounded-full w-full py-4 px-6 text-gray-700 focus:outline-none appearance-none"
+        className="w-full rounded-full py-4 px-6 text-gray-700 focus:outline-none appearance-none"
         id="search"
         type="text"
         placeholder={props.searchQueryHistory || "Search Gifs"}
@@ -41,8 +44,15 @@ const SearchBar = (props: any) => (
 
       <div className="h-4 border border-r border-gray-300" />
 
+      <SelectDropdown
+        name={`explicitRating`}
+        handleChangeSearchInput={props.handleChangeSearchInput}
+      />
+
+      <div className="h-4 border border-r border-gray-300" />
+
       <div className="p-4">
-        <button type="submit" className="text-blue-500 hover:text-blue-300">
+        <button type="submit" className="text-blue-400 hover:text-blue-600">
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </div>
@@ -60,30 +70,20 @@ const SelectDropdown = (props: any) => {
 
   return (
     <>
-      <div className="relative inline-flex">
-        <svg
-          className="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 412 232"
-        >
-          <path
-            d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-            fill="#648299"
-            fillRule="nonzero"
-          />
-        </svg>
-
+      <div className="flex items-center px-4 text-xs text-gray-400 hover:text-blue-600">
         <select
-          className="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
+          className="bg-white hover:text-blue-600 focus:outline-none cursor-pointer appearance-none"
           name={props.name}
           onChange={props.handleChangeSearchInput}
         >
           {explicitRatingSelectOptions.map((value: any) => (
             <option value={value.key} key={value.key}>
-              {value.name}
+              Rating: {value.name}
             </option>
           ))}
         </select>
+
+        <FontAwesomeIcon icon={faChevronDown} />
       </div>
     </>
   );
@@ -135,7 +135,7 @@ const Header = () => {
   };
 
   return (
-    <>
+    <div className="w-full border border-gray-400 py-12">
       <SearchBar
         handleChangeSearchInput={handleChangeSearchInput}
         handleClickSearchButton={handleClickSearchButton}
@@ -144,18 +144,13 @@ const Header = () => {
         searchQueryHistory={searchHistory.searchQuery}
         searchQuery={searchInput.searchQuery}
       />
-
-      <SelectDropdown
-        name={`explicitRating`}
-        handleChangeSearchInput={handleChangeSearchInput}
-      />
-    </>
+    </div>
   );
 };
 
 const MessageBanner = () => {
   return (
-    <div className="sm:container flex flex-col items-center border border-red-400">
+    <div className="w-full border border-red-400 ">
       <p className="p-4">Message Banner</p>
     </div>
   );
@@ -172,8 +167,9 @@ const ViewGiphyList = () => {
   }, [searchUrl, setUrl]);
 
   return (
-    <div className="sm:container">
-      <div className="flex flex-wrap justify-center items-center border border-green-400">
+    <>
+      <div className="w-full flex flex-wrap justify-center items-center border border-green-400">
+        <h1>Gif List</h1>
         {loading && <div>Loading Gifs...</div>}
 
         {error && <div>There was an error loading Gifs.</div>}
@@ -200,7 +196,7 @@ const ViewGiphyList = () => {
             </div>
           ))}
       </div>
-    </div>
+    </>
   );
 };
 
@@ -214,16 +210,19 @@ const ViewGiphyListPagination = () => {
 
 const App = () => {
   return (
-    <FlexboxContainerFullWidthCentered classes="flex-col">
-      <SearchBarContextProvider>
-        <div className="sm:container border border-gray-400 py-12">
+    <FlexFullWidthCenter>
+      <FlexContainer
+        container="sm"
+        classes="flex-col justify-center items-center "
+      >
+        <SearchBarContextProvider>
           <Header />
-        </div>
-        <MessageBanner />
-        <ViewGiphyList />
-        <ViewGiphyListPagination />
-      </SearchBarContextProvider>
-    </FlexboxContainerFullWidthCentered>
+          <MessageBanner />
+          <ViewGiphyList />
+          <ViewGiphyListPagination />
+        </SearchBarContextProvider>
+      </FlexContainer>
+    </FlexFullWidthCenter>
   );
 };
 
