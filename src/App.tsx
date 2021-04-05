@@ -21,7 +21,7 @@ const SearchBar = (props: any) => (
         className="rounded-full w-full py-4 px-6 text-gray-700 focus:outline-none appearance-none"
         id="search"
         type="text"
-        placeholder={props.searchQueryHistory || "Search"}
+        placeholder={props.searchQueryHistory || "Search Gifs"}
         name={`searchQuery`}
         value={props.searchQuery}
         onChange={props.handleChangeSearchInput}
@@ -230,7 +230,6 @@ const ViewGiphyList = () => {
               id={value.id}
               className="border border-gray-300 rounded-lg w-64 m-4 p-4"
             >
-              <div className="pb-4">{value.title.toUpperCase()}</div>
               {value.source && (
                 <a href={value.source} target="_blank" rel="noreferrer">
                   Source
