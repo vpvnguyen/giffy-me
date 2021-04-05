@@ -94,7 +94,6 @@ const Header = () => {
 
   const { searchInput, setSearchInput } = useSearchBarContext();
   const { setSearchUrl } = useSearchUrlContext();
-  // import previous search query
   const { searchHistory, setSearchHistory } = useSearchHistoryContext();
 
   const handleChangeSearchInput = (event: any) => {
@@ -157,10 +156,10 @@ const Header = () => {
 };
 
 const Bookmarks = () => {
-  const bookmarks = [
+  const [bookmarks, setBookmarks] = useState([
     { key: "bookmark1", name: "bookmark1" },
     { key: "bookmark2", name: "bookmark2" },
-  ];
+  ]);
 
   return (
     <>
@@ -180,7 +179,7 @@ const Bookmarks = () => {
         <select
           className="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
           name={`bookmarks`}
-          // onChange={handleChangeSearchInput}
+          // onChange={}
         >
           {bookmarks.map((value: any) => (
             <option value={value.key} key={value.key}>
