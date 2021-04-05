@@ -25,11 +25,13 @@ const SearchBar = (props: any) => (
         name={`searchQuery`}
         value={props.searchQuery}
         onChange={props.handleChangeSearchInput}
+        onKeyPress={props.handleKeyPress}
       />
 
       <div className="p-4">
         {props.searchQuery && (
           <button
+            type="reset"
             onClick={props.handleClickClearSearch}
             className="text-gray-400 hover:text-red-400"
           >
@@ -124,6 +126,10 @@ const Header = () => {
     });
   };
 
+  const handleKeyPress = (event: any) => {
+    if (event.keyCode === 13) handleClickSearchButton(event);
+  };
+
   const handleClickClearSearch = (event: any) => {
     event.preventDefault();
 
@@ -136,6 +142,7 @@ const Header = () => {
         handleChangeSearchInput={handleChangeSearchInput}
         handleClickSearchButton={handleClickSearchButton}
         handleClickClearSearch={handleClickClearSearch}
+        handleKeyPress={handleKeyPress}
         searchQueryHistory={searchHistory.searchQuery}
         searchQuery={searchInput.searchQuery}
       />
