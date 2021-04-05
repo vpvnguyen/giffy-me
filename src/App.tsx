@@ -13,7 +13,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 
-// new component to add search parameters and construct search url
 const SearchBar = (props: any) => (
   <form onSubmit={props.handleClickSearchButton}>
     <div className="flex items-center rounded-full border border-gray-400 hover:border-gray-700">
@@ -147,7 +146,6 @@ const Header = () => {
         searchQuery={searchInput.searchQuery}
       />
 
-      {/* rating dropdown */}
       <SelectDropdown
         name={`explicitRating`}
         handleChangeSearchInput={handleChangeSearchInput}
@@ -203,7 +201,6 @@ const MessageBanner = () => {
   );
 };
 
-// pass search URL into component to fetch data
 const ViewGiphyList = () => {
   const { searchUrl } = useSearchUrlContext();
   console.log("ViewGiphyList searchUrl", searchUrl);
