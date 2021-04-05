@@ -111,6 +111,7 @@ dist
 
 # testing
 /coverage
+/src/test/
 
 # production
 /build
