@@ -195,14 +195,6 @@ const ViewGiphyList = () => {
   );
 };
 
-const ViewGiphyListPagination = () => {
-  return (
-    <>
-      <div>Pagination | Lazy Loading (all images)</div>
-    </>
-  );
-};
-
 const App = () => {
   return (
     <FlexFullWidthCenter>
@@ -214,7 +206,6 @@ const App = () => {
           <Header />
           <MessageBanner />
           <ViewGiphyList />
-          <ViewGiphyListPagination />
         </SearchBarContextProvider>
       </FlexContainer>
     </FlexFullWidthCenter>
