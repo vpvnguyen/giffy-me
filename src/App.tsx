@@ -85,14 +85,14 @@ const SearchBar = () => {
           )}
         </div>
 
-        <div className="h-4 border border-r border-gray-300" />
+        <div className="h-5 border border-r border-gray-200" />
 
         <SelectDropdown
           name={`explicitRating`}
           handleChangeSearchInput={handleChangeSearchInput}
         />
 
-        <div className="h-4 border border-r border-gray-300" />
+        <div className="h-5 border border-r border-gray-200" />
 
         <div className="p-4">
           <button type="submit" className="text-blue-400 hover:text-blue-600">
