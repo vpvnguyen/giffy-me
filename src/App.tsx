@@ -35,10 +35,11 @@ const SearchBar = () => {
 
     console.log("SearchBar handleClickSearchButton searchInput", searchInput);
 
-    const url: string = GiphyApiModel.getSearchUrl(searchInput);
+    const GiphyApi = new GiphyApiModel()
+    const giphyUrl: string = GiphyApi.getSearchUrl(searchInput);
 
-    console.log("SearchBar handleClickSearchButton url", url);
-    setSearchUrl(url);
+    console.log("SearchBar handleClickSearchButton url", giphyUrl);
+    setSearchUrl(giphyUrl);
 
     setSearchInput({ ...searchInput, searchQuery: "" });
 
@@ -134,8 +135,6 @@ const SelectDropdown = (props: any) => {
 };
 
 const Header = () => {
-  console.log("Header()");
-
   return (
     <div className="w-full border border-gray-400 py-12">
       <SearchBar />
@@ -153,8 +152,6 @@ const MessageBanner = () => {
 
 const ViewGiphyList = () => {
   const { searchUrl } = useSearchUrlContext();
-  console.log("ViewGiphyList searchUrl", searchUrl);
-
   const { loading, error, response, setUrl } = useDataFetcher();
 
   useEffect(() => {
