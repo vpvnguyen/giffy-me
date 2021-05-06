@@ -6,7 +6,7 @@ User friendly GIF search and share
 
 #### Giphy API Key
 
-- https://developers.giphy.com/docs/api#quick-start-guide
+- Register and get an API key: https://developers.giphy.com/docs/api#quick-start-guide
 - Set API key in `.env`
 
 ```
