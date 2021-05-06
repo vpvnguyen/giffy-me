@@ -3,6 +3,6 @@
 User friendly GIF search and share
 
 ## How to Run
-- `git clone <REPO>`
-- `cd` into <REPO>
+- `git clone` repo
+- `cd` into repo
 - `yarn start`
