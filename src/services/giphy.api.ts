@@ -13,8 +13,8 @@ export interface IGiphyApiSearchResponse {
 }
 export class GiphyApiModel {
   private readonly _baseUrl: string = "https://api.giphy.com/v1/gifs";
-  private readonly _apiKey: string =
-    process.env.REACT_APP_GIPHY_API_KEY || "";
+  private readonly _apiKey: string | undefined =
+    process.env.REACT_APP_GIPHY_API_KEY
 
     constructor () {
       try {
