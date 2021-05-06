@@ -2,9 +2,15 @@
 
 User friendly GIF search and share
 
-## Requirements
+## How to Run
 
-#### Giphy API Key
+#### Setup
+
+- `git clone` repo
+- `cd` into repo
+- Rename `.env.example` to `.env`
+
+#### Add Giphy API Key
 
 - Register and get an API key: https://developers.giphy.com/docs/api#quick-start-guide
 - Set API key in `.env`
@@ -13,9 +19,8 @@ User friendly GIF search and share
 REACT_APP_GIPHY_API_KEY=API_KEY
 ```
 
-## How to Run
+#### Run Scripts
 
-- `git clone` repo
-- `cd` into repo
-- `yarn install`
+Development:
+
 - `yarn start`
