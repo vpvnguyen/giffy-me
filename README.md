@@ -4,7 +4,7 @@ User friendly GIF search and share
 
 ## Requirements
 
-### Giphy API Key
+#### Giphy API Key
 
 - https://developers.giphy.com/docs/api#quick-start-guide
 - Set API key in `.env`
