@@ -21,6 +21,4 @@ REACT_APP_GIPHY_API_KEY=API_KEY
 
 #### Run Scripts
 
-Development:
-
-- `yarn start`
+- Development: `yarn start`
