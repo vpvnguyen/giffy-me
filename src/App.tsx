@@ -35,7 +35,7 @@ const SearchBar = () => {
 
     console.log("SearchBar handleClickSearchButton searchInput", searchInput);
 
-    const GiphyApi = new GiphyApiModel()
+    const GiphyApi = new GiphyApiModel();
     const giphyUrl: string = GiphyApi.getSearchUrl(searchInput);
 
     console.log("SearchBar handleClickSearchButton url", giphyUrl);
@@ -62,9 +62,9 @@ const SearchBar = () => {
 
   return (
     <form onSubmit={handleClickSearchButton}>
-      <div className="flex items-center rounded-full border border-gray-400 hover:border-gray-600">
+      <div className="flex items-center border border-gray-400 rounded-full hover:border-gray-600">
         <input
-          className="w-full rounded-full py-4 px-6 text-gray-700 focus:outline-none appearance-none"
+          className="w-full px-6 py-4 text-gray-700 rounded-full appearance-none focus:outline-none"
           id="search"
           type="text"
           placeholder={searchHistory.searchQuery || "Search Gifs"}
@@ -117,7 +117,7 @@ const SelectDropdown = (props: any) => {
     <>
       <div className="flex items-center px-2 text-xs text-gray-400 hover:text-blue-600">
         <select
-          className="pr-1 bg-white hover:text-blue-600 focus:outline-none cursor-pointer appearance-none"
+          className="pr-1 bg-white appearance-none cursor-pointer hover:text-blue-600 focus:outline-none"
           name={props.name}
           onChange={props.handleChangeSearchInput}
         >
@@ -136,7 +136,7 @@ const SelectDropdown = (props: any) => {
 
 const Header = () => {
   return (
-    <div className="w-full border border-gray-400 py-12">
+    <div className="w-full py-12 border border-gray-400">
       <SearchBar />
     </div>
   );
@@ -160,7 +160,7 @@ const ViewGiphyList = () => {
 
   return (
     <>
-      <div className="w-full flex flex-wrap justify-center items-center border border-green-400">
+      <div className="flex flex-wrap items-center justify-center w-full border border-green-400">
         <h1>Gif List</h1>
         {loading && <div>Loading Gifs...</div>}
 
@@ -173,7 +173,7 @@ const ViewGiphyList = () => {
             <div
               key={value.id}
               id={value.id}
-              className="border border-gray-300 rounded-lg w-64 m-4 p-4"
+              className="w-64 p-4 m-4 border border-gray-300 rounded-lg"
             >
               {value.source && (
                 <a href={value.source} target="_blank" rel="noreferrer">
@@ -197,7 +197,7 @@ const App = () => {
     <FlexFullWidthCenter>
       <FlexContainer
         container="sm"
-        classes="flex-col justify-center items-center "
+        classes="flex-col justify-center items-center"
       >
         <SearchBarContextProvider>
           <Header />
