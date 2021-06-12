@@ -161,7 +161,6 @@ const ViewGiphyList = () => {
   return (
     <>
       <div className="flex flex-wrap items-center justify-center w-full border border-green-400">
-        <h1>Gif List</h1>
         {loading && <div>Loading Gifs...</div>}
 
         {error && <div>There was an error loading Gifs.</div>}
