@@ -43,7 +43,7 @@ const SearchBar = () => {
 
     setSearchInput({ ...searchInput, searchQuery: "" });
 
-    // set previous search query
+    // set previous search query; wrap this in its own handler
     setSearchHistory({
       ...searchHistory,
       searchQuery: searchInput.searchQuery,
